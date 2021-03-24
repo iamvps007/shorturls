@@ -15,7 +15,7 @@ app.use(
 );
 
 app.get("/", (request, response) => {
-  response.json({ info: "Node.js, Express, and Postgres API" });
+  response.json({ api: "running...." });
 });
 
 app.get("/go/:id", (request, response) => {
