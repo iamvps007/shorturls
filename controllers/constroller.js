@@ -67,6 +67,7 @@ exports.createLink = (request, response) => {
       response.status(200).send({
         status: res.rowCount == 1 ? true : false,
         shortCode: shortLink,
+        origin: link,
       })
     )
     .catch((err) => {
@@ -76,7 +77,23 @@ exports.createLink = (request, response) => {
     });
 };
 
- 
+exports.getLink = (request, response) => {
+  const code = request.params.code;
+  console.log(code);
+  pool
+    .query("SELECT *FROM shorturls.links WHERE shortLink LIKE $1", [code])
+    .then((res) =>
+      response.status(200).send({
+        status: res.rowCount == 1 ? true : false,
+        link: res.rows[0],
+      })
+    )
+    .catch((err) => {
+      response.status(404).send({
+        message: err.detail,
+      });
+    });
+};
 
 /** DO BE LATER */
 

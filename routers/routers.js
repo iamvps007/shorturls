@@ -19,6 +19,8 @@ module.exports = (app) => {
   /** create link */
 
   router.post("/link",shortUrls.createLink);
+
+  router.get("/link/:code", shortUrls.getLink);
   
 
 
